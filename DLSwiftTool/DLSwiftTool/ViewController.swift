@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     
     let navBar: DLNavgationBarView = {
-        let view = DLNavgationBarView.init(style: .custom)
+        let view = DLNavgationBarView.init(style: .push)
         view.title = "DLSwiftTool"
         view.leftButton.isHidden = true
         return view

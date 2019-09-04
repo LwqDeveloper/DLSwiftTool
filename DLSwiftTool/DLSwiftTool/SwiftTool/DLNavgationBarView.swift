@@ -12,9 +12,9 @@ import UIKit
 public protocol DLNavgationBarViewAble: NSObjectProtocol {
     func leftButtonTouchUpInside(_ sender: UIButton)
 }
-// MARK: 导航视图样式，pop或者present
+// MARK: 导航视图样式，push或者present
 public enum NavgationBarViewStyle: String {
-    case pop = "pop"
+    case push = "push"
     case present = "present"
     case custom = "custom"
     case none = "none"
@@ -27,7 +27,7 @@ open class DLNavgationBarView: UIView {
     // delegate
     public weak var delegate: DLNavgationBarViewAble?
     
-    var style: NavgationBarViewStyle = .pop
+    var style: NavgationBarViewStyle = .push
     
     var leftColorTextCompletion: DLNavBarCompletion!
     var rightColorTextCompletion: DLNavBarCompletion!
@@ -119,7 +119,7 @@ open class DLNavgationBarView: UIView {
             self.delegate?.leftButtonTouchUpInside(sender)
         }else {
             let vc = self.getFirstViewController()
-            if self.style == .pop {
+            if self.style == .push {
                 vc?.navigationController?.popViewController(animated: true)
             }else {
                 vc?.dismiss(animated: true, completion: nil)
@@ -151,7 +151,7 @@ open class DLNavgationBarView: UIView {
         self.rightView.frame = CGRect(x: DLUtilsScreen.screenWidth - (rightWidth + rightMargin), y: 0, width: rightWidth, height: DLUtilsScreen.navigationBarHeight)
         
         // leftButton
-        if self.style == .pop {
+        if self.style == .push {
             leftButton.setImage(UIImage(named: "icon_navbar_Chevron", in: Bundle(for: type(of: self)), compatibleWith: nil), for: .normal)
         }else if self.style == .present {
             leftButton.setImage(UIImage(named: "icon_navbar_close", in: Bundle(for: type(of: self)), compatibleWith: nil), for: .normal)
